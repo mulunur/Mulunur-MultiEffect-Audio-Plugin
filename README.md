@@ -1,2 +1,2 @@
 # Mulunur-MultiEffect-Audio-Plugin
-Audio effect chain builded with JUCE
+Audio effect chain builded on c++ with JUCE
