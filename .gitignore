@@ -1,0 +1,13 @@
+# CMake build output (generated Xcode project, binaries)
+build/
+
+# macOS
+.DS_Store
+
+# Xcode user-specific files
+xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# IDEs
+.vscode/
+.idea/
