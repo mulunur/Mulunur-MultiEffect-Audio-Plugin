@@ -1,6 +1,6 @@
 #pragma once
 
-#include <juce_audio_processors/juce_audio_processors.h>
+#include <JuceHeader.h>
 
 //==============================================================================
 class AudioPluginAudioProcessor final : public juce::AudioProcessor
@@ -42,7 +42,21 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    enum class DSP_Option
+    {
+        Phase,
+        Chorus,
+        Overdrive,
+        LadderFilter,
+        END_OF_LIST
+    };
+    
 private:
+    juce::dsp::Phaser<float> phaser;
+    juce::dsp::Chorus<float> chorus;
+    juce::dsp::LadderFilter<float> overdrive, ladderFilter;
+    juce::dsp::Reverb reverb;
+    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPluginAudioProcessor)
 };

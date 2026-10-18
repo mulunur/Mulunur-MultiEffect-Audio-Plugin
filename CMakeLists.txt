@@ -57,13 +57,16 @@ juce_add_plugin(MulunurMultiEffect
     NEEDS_WEB_BROWSER FALSE                     # Set to TRUE if you need to use webviews
     NEEDS_CURL FALSE)                           # Set to TRUE if you need to use curl
 
+# Use C++20 for the plugin and all its format targets (JUCE itself only requires C++17)
+target_compile_features(MulunurMultiEffect PUBLIC cxx_std_20)
+
 # `juce_generate_juce_header` will create a JuceHeader.h for a given target, which will be generated
 # into your build tree. This should be included with `#include <JuceHeader.h>`. The include path for
 # this header will be automatically added to the target. The main function of the JuceHeader is to
 # include all your JUCE module headers; if you're happy to include module headers directly, you
 # probably don't need to call this.
 
-# juce_generate_juce_header(AudioPluginExample)
+ juce_generate_juce_header(MulunurMultiEffect)
 
 # `target_sources` adds source files to a target. We pass the target that needs the sources as the
 # first argument, then a visibility parameter for the sources which should normally be PRIVATE.
@@ -73,7 +76,9 @@ juce_add_plugin(MulunurMultiEffect
 target_sources(MulunurMultiEffect
     PRIVATE
         src/PluginEditor.cpp
-        src/PluginProcessor.cpp)
+        src/PluginProcessor.cpp
+	src/PluginProcessor.cpp
+	src/PluginProcessor.h)
 
 # `target_compile_definitions` adds some preprocessor definitions to our target. In a Projucer
 # project, these might be passed in the 'Preprocessor Definitions' field. JUCE modules also make use
@@ -108,6 +113,7 @@ target_link_libraries(MulunurMultiEffect
     PRIVATE
         # AudioPluginData           # If we'd created a binary data target, we'd link to it here
         juce::juce_audio_utils
+	juce::juce_dsp
     PUBLIC
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags
