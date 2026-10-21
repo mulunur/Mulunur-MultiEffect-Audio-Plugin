@@ -13,6 +13,11 @@ AudioPluginAudioProcessor::AudioPluginAudioProcessor()
                      #endif
                        )
 {
+    for ( auto* ptr : dspInstances)
+    {
+        ptr->reset();
+        
+    }
 }
 
 AudioPluginAudioProcessor::~AudioPluginAudioProcessor()
